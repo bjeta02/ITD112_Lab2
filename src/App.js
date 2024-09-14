@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import Dashboard from './views/Dashboard';
+import AddDengueData from './views/AddDengueData';
+import DengueDataList from './views/DengueDataList';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div style={{ display: 'flex' }}>
+        <Sidebar />
+        <div style={styles.content}>
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/add-dengue-data" element={<AddDengueData />} />
+            <Route path="/dengue-data-list" element={<DengueDataList />} />
+            <Route path="/" element={<Dashboard />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
-}
+};
+
+// Inline styles
+const styles = {
+  content: {
+    marginLeft: '360px', // Adjust margin to match the sidebar width
+    padding: '20px',
+    flex: 1,
+    overflowX: 'auto', // Ensure horizontal scrolling if content overflows
+  },
+};
 
 export default App;
